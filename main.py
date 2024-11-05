@@ -1,57 +1,75 @@
-# создаем массив (список) для хранения продуктов
-plist = []
+# slovar = {
+#     "помидор":"фрукт",
+#     "арбуз":"ягода",
+#     "age":100
+# }
+# print(slovar["арбуз"])
+
+# slovar.pop("age")
+# slovar["Новое поле"] = True
+# print(slovar)
+# slovar.popitem()
+# print(slovar)
+# print("Список ключей", slovar.keys())
+# print("Список значений", slovar.values())
 
 
-# переменная для выбора действий
-choose = None
+player = {
+    "Имя": "John",
+    "Здоровье": 100,
+    "Уровень": 1,
+    "Мана": 100,
+    "Урон" : 25,
+    "Защита" : 10
+}
 
-# пока мы не ввели 0, программа будет работать
-while choose != "0":
-    # таблица выбора действий для измаенения списка
-    choose = input(
-        "0 - выйди\n1 - добавить в список\n2 - удалить из списка\n3 - показать список\n4 - очистить список\n"
-    )
-    # команда выхода из программы
-    if choose == "0":
-        print("Программа завершена")
-    # команда добавления элументов в список
-    elif choose == "1":
-        print("Добавить в список")
-        choose1 = input("Введите то что хотите добавит в список: ")
-        plist.append(choose1)
-    # команда удаления определенного элемента из списка
-    elif choose == "2":
-        print("Удалить из списка")
-        choose1 = input(
-            "Введите то что хотите удалить из списка или его порядковый номер: "
-        )
-        if choose1 in plist:
-            plist.remove(choose1)
-        # определение число это или нет
-        elif choose1.isnumeric():
-            num = int(choose1)
-            # команда для выбора определенного элемента для удаления
-            if num <= len(plist):
-                plist.pop(num - 1)
-                print("Удаляем элемент с номером", num)
-                print("\nСписок продуктов\n")
-                for i in range(0, len(plist)):
-                    print(f"{i+1}. {plist[i]}")
-                print("")
-            else:
-                print("Номер продукта выходит за границы списка.")
-        else:
-            print("Такого продукта нет в списке")
-    # команда для просмотра элементов находящихся в списке
-    elif choose == "3":
-        print("\nСписок продуктов\n")
-        for i in range(0, len(plist)):
-            print(f"{i+1}. {plist[i]}")
-        print("")
-    # команда для полного очищения списка
-    elif choose == "4":
-        print("список очищен")
-        plist.clear()
-    # вывод ошибки при неправильном вводе команды
+for key in player:
+    print(f"{key}, {player[key]}")
+
+print(" ")
+
+enemy = {
+    "Имя": "Nhoj",
+    "Здоровье": 100,
+    "Уровень": 1,
+    "Мана": 100,
+    "Урон" : 25,
+    "Защита" : 10
+}
+
+for key in enemy:
+    print(f"{key} : {enemy[key]}")
+
+
+import time
+
+import random
+
+while True:
+    if player["Здоровье"] <= 0:
+        print("Мы проиграли")
+        break
+    elif enemy["Здоровье"] <= 0:
+        print("Мы выиграли")
+        break
+
+    rand = random.randint(1,6)
+    if rand == 1:
+        print(f"{player["Имя"]} промахнулся")
     else:
-        print("Ошибка: введен неверный код")
+        print(f"{enemy["Имя"]} наносит {player["Имя"]} {enemy["урон"]} урона")
+        enemy["Здоровье"] -= player["урон"]
+
+    print("\nОчередь противника\n")
+
+    rand = random.randint(1,6)
+    if rand == 1:
+        print(f"{enemy["Имя"]} промахнулся")
+    else:
+        print(f"{enemy["Имя"]} наносит {player["Имя"]} {enemy["урон"]} урона")
+        player["Здоровье"] -= enemy["урон"]
+
+    print("\nОчередь Игрока\n")
+    time.sleep(0.5)
+print("У игрока осталось:", player["Здоровье"])
+print("У игрока осталось:", enemy["Здоровье"])
